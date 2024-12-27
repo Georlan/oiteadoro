@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Me perdoa?</title>
+    <style>
+        /* Estilo da página */
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #f6d365, #fda085);
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative; /* Para que o coração fique no fundo */
+        }
+
+        #conteudo {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 20px 30px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1; /* Garantir que o conteúdo fique sobre o fundo */
+        }
+
+        h2 {
+            color: #333;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            background: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background: #555;
+        }
+
+        .btn-nao {
+            position: absolute;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 0; /* Coloca o coração no fundo */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="conteudo">
+        <h2>Me perdoa por ser tão chato às vezes?</h2>
+        <button class="btn" id="btn-sim" onclick="sim()">SIM</button>
+        <button class="btn btn-nao" onclick="desvia(this)" onmouseover="desvia(this)">NÃO</button>
+    </div>
+
+    <!-- Canvas para o coração -->
+    <canvas id="heart"></canvas>
+
+    <!-- Incluindo o script do coração -->
+    <script src="heart.js"></script>
+
+    <script>
+        function sim() {
+            // Remove os botões SIM e NÃO
+            document.getElementById('btn-sim').style.display = 'none';
+            document.querySelector('.btn-nao').style.display = 'none';
+
+            // Exibe a mensagem carinhosa
+            var mensagem = document.createElement('p');
+            mensagem.innerHTML = "Eu gosto muito de você, nada é mentira, nunca foi um incômodo, não importa quantas vezes você diga que não nasceu ontem.";
+            mensagem.style.fontSize = '1.5em';
+            mensagem.style.color = '#333';
+            mensagem.style.marginTop = '20px';
+            document.getElementById('conteudo').appendChild(mensagem);
+
+            // Após a mensagem ser fechada, começa a animação do coração
+            setTimeout(function() {
+                initHeart(); // Inicializa a animação do coração
+            }, 500); // Tempo de espera após o alert (em milissegundos)
+        }
+
+        function desvia(btn) {
+            // Faz o botão "NÃO" se mover
+            btn.style.position = 'absolute';
+            btn.style.bottom = geraPosicao(10, 90);
+            btn.style.left = geraPosicao(10, 90);
+            console.log('opa, desviei...');
+        }
+
+        function geraPosicao(min, max) {
+            // Gera uma posição aleatória entre min e max
+            return (Math.random() * (max - min) + min) + "%";
+        }
+    </script>
+</body>
+
+</html>
